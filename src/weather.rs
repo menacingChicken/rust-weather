@@ -1,34 +1,11 @@
-const API_KEY: &str = include_str!("../api_key.in");
+use super::MyError;
+
+const API_KEY: &str = env!("API_KEY");
 
 #[derive(Debug, serde::Deserialize, serde::Serialize)]
 pub struct GeoLocation {
     lat: f32,
     lon: f32
-}
-
-#[derive(Debug)]
-pub struct MyError {
-    msg: String
-}
-
-impl MyError {
-    fn new(msg: &str) -> MyError {
-        MyError {
-            msg: msg.to_owned()
-        }
-    }
-}
-
-impl std::fmt::Display for MyError {
-    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
-        write!(f, "{}", self.msg)
-    }
-}
-
-impl std::error::Error for MyError {
-    fn description(&self) -> &str {
-        &self.msg
-    }
 }
 
 impl GeoLocation {
@@ -46,7 +23,7 @@ impl GeoLocation {
         match locations.pop()
         {
             Some(v) => Ok(v),
-            None => Err(Box::new(MyError::new("could not resolve location")))
+            None => Err(MyError::new("could not resolve location"))
         }
     }
 }
