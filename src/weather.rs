@@ -1,6 +1,6 @@
 use super::MyError;
 
-const API_KEY: &str = include_str!("../api_key.in");
+const API_KEY: &str = env!("API_KEY");
 
 #[derive(Debug, serde::Deserialize, serde::Serialize)]
 pub struct GeoLocation {
