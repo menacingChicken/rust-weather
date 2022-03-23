@@ -36,3 +36,12 @@ pub fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     Ok(())
 }
+
+mod tests
+{
+    #[test]
+    fn example()
+    {
+        assert_eq!(1, 2);
+    }
+}
